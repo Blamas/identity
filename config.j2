@@ -1,0 +1,93 @@
+theme = "awesome-identity"
+enableGitInfo = true
+enableRobotsTXT = true
+disableKinds = ["taxonomyTerm"]
+
+{%- set portrait = "/images/profile.jpg" %}
+{%- set firstname =  "Théo" %}
+{%- set lastname =  "Rey" %}
+
+{%- if 'https://' in CNAME %}
+baseURL = "{{CNAME}}"
+{%- else %}
+baseURL = "https://{{CNAME}}"
+{%- endif %}
+
+{%- if defaultLang %}
+DefaultContentLanguage = "{{ defaultLang }}"
+{%- else %}
+DefaultContentLanguage = "en"
+{%- endif %}
+
+[languages]
+  [languages.en]
+    title = "{{firstname}} {{lastname}} - Computer science student"
+    languageName = "English"
+    weight = 1
+  [languages.fr]
+    title = "{{firstname}} {{lastname}} - Étudiant en informatique"
+    languageName = "French"
+    weight = 2
+
+## Profile Configurations
+{% set profileBase -%}
+  portrait = "{{portrait}}"
+  firstname = "{{firstname}}"
+  lastname = "{{lastname}}"
+{%- endset -%}
+
+[languages.en.profile]
+  {{ profileBase }}
+  title = "Computer science student"
+  bio = """IT project manager in apprenticeship at Orange.
+
+  Technologies and OpenSource enthusiast, always in search for new ways to optimise and improve my workflows.
+
+  I lose myself in my hobbies such as the creation of IOT devices, mechanical keyboards developpement and the automation of everything I can think of.
+  """
+
+[languages.fr.profile]
+  {{ profileBase }}
+  title = "Étudiant en informatique"
+  bio = """Alternant responsable de projet informatique à Orange.
+
+  Passionné de nouvelles technologies et tout particulièrement de projets OpenSource, toujours à la recherche de nouvelles méthodes pour optimiser et améliorer mes workflows.
+  
+  Je me perds à travers mes passions tels que la création d'objets IOT, conceptions de claviers mécaniques et l'automatisation de tout ce qu'il me passe sous la main.
+            """
+
+## Contacts Configurations
+[params.contacts]
+  email = "contact@reyth.dev"
+  github = "Blamas"
+  gitlab = "Blamas"
+  linkedin = "theorey"
+
+## Actions Configurations
+{%- set lastProject = "https://github.com/Blamas?tab=repositories" %}
+[[languages.en.params.actions]]
+  name = "Review My CV"
+  url = "https://en.wikipedia.org/wiki/Procrastination"
+[[languages.en.params.actions]]
+  name = "Last project"
+  url = "{{lastProject}}"
+
+[[languages.fr.params.actions]]
+  name = "Voir mon CV"
+  url = "https://fr.wikipedia.org/wiki/Procrastination"
+[[languages.fr.params.actions]]
+  name = "Derniers projets"
+  url = "{{lastProject}}"
+
+## Meta Configurations (HTTP Meta tags & OpenGraph)
+[params.meta]
+  description = "Computer science student in apprenticeship at Orange"
+  keywords = "{{lastname}}, {{firstname}}"
+  images = [
+    "{{portrait}}"
+  ]
+
+## Footer Configurations
+[params.footer]
+  copyright = "© {{year}} Théo Rey. [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)."
+  poweredBy = true
