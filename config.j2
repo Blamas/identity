@@ -1,0 +1,93 @@
+theme = "awesome-identity"
+enableGitInfo = true
+enableRobotsTXT = true
+disableKinds = ["taxonomyTerm"]
+
+{%- set portrait = "/images/profile.jpg" %}
+{%- set firstname =  "Théo" %}
+{%- set lastname =  "Rey" %}
+
+{%- if 'https://' in CNAME %}
+baseURL = "{{CNAME}}"
+{%- else %}
+baseURL = "https://{{CNAME}}"
+{%- endif %}
+
+{%- if defaultLang %}
+DefaultContentLanguage = "{{ defaultLang }}"
+{%- else %}
+DefaultContentLanguage = "en"
+{%- endif %}
+
+[languages]
+  [languages.en]
+    title = "{{firstname}} {{lastname}} - SRE / DevOps"
+    languageName = "English"
+    weight = 1
+  [languages.fr]
+    title = "{{firstname}} {{lastname}} - SRE / DevOps"
+    languageName = "French"
+    weight = 2
+
+## Profile Configurations
+{% set profileBase -%}
+  portrait = "{{portrait}}"
+  firstname = "{{firstname}}"
+  lastname = "{{lastname}}"
+{%- endset -%}
+
+[languages.en.profile]
+  {{ profileBase }}
+  title = "SRE / DevOps"
+  bio = """DevOps Engineer at Zelros.
+
+  Technologies and OpenSource enthusiast, always in search of new ways to optimise and improve my workflows.
+
+  I may spend hours improving my Homelab, creating IOT devices, working on various electronic projects and the automation of everything I can think of.
+  """
+
+[languages.fr.profile]
+  {{ profileBase }}
+  title = "SRE / DevOps"
+  bio = """Ingénieur DevOps à Zelros.
+
+  Passionné de nouvelles technologies et tout particulièrement de projets OpenSource, toujours à la recherche de nouvelles méthodes pour optimiser et améliorer mes workflows.
+  
+  Je peux passer des heures à améliorer mon Homelab, à créer des objets IOT, à travailler sur divers projets électroniques et à automatiser de tout ce qui me passe sous la main.
+            """
+
+## Contacts Configurations
+[params.contacts]
+  email = "contact@reyth.dev"
+  github = "Blamas"
+  gitlab = "Blamas"
+  linkedin = "theorey"
+
+## Actions Configurations
+{%- set lastestProjects = "https://github.com/Blamas?tab=repositories" %}
+[[languages.en.params.actions]]
+  name = "Review My CV"
+  url = "https://docs.reyth.dev/cv.pdf"
+[[languages.en.params.actions]]
+  name = "Latest projects"
+  url = "{{lastestProjects}}"
+
+[[languages.fr.params.actions]]
+  name = "Voir mon CV"
+  url = "https://docs.reyth.dev/cv.pdf"
+[[languages.fr.params.actions]]
+  name = "Derniers projets"
+  url = "{{lastestProjects}}"
+
+## Meta Configurations (HTTP Meta tags & OpenGraph)
+[params.meta]
+  description = "DevOps Engineer at Zelros"
+  keywords = "{{lastname}}, {{firstname}}"
+  images = [
+    "{{portrait}}"
+  ]
+
+## Footer Configurations
+[params.footer]
+  copyright = "© {{year}} Théo Rey. [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)."
+  poweredBy = true
